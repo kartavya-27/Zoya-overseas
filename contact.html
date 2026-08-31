@@ -753,6 +753,98 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+        /* Inlined from js/contact.js */
+/* ============================================
+   ZOYA OVERSEAS LLC - Contact Form Handler with Firebase & EmailJS
+   ============================================ */
+
+// 1. TODO: Initialize EmailJS (Replace with your actual Public Key)
+emailjs.init("wLJLeEkM7kcuPIsr9");
+
+// 2. TODO: Initialize Firebase (Replace with your actual config)
+const firebaseConfig = {
+  apiKey: "AIzaSyBUfvUESfr2Mx11nhqFD01XHtq7gg2kq7I",
+  authDomain: "zoya-173d6.firebaseapp.com",
+  databaseURL: "https://zoya-173d6-default-rtdb.firebaseio.com",
+  projectId: "zoya-173d6",
+  storageBucket: "zoya-173d6.firebasestorage.app",
+  messagingSenderId: "185154458416",
+  appId: "1:185154458416:web:dd5a5751e481a7996deef5",
+  measurementId: "G-N88VSVX1H0"
+};
+
+// Initialize Firebase
+if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+}
+const database = firebase.database();
+
+document.addEventListener('DOMContentLoaded', () => {
+    const contactForm = document.getElementById('contactForm');
+    const submitBtn = contactForm ? contactForm.querySelector('button[type="submit"]') : null;
+
+    if (contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Change button state to loading
+            const originalBtnText = submitBtn.innerHTML;
+            submitBtn.innerHTML = 'Sending... <i class="fas fa-circle-notch fa-spin" style="margin-left: 8px;"></i>';
+            submitBtn.disabled = true;
+
+            // Collect form data
+            const formData = {
+                id: Date.now().toString(),
+                date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute:'2-digit' }),
+                firstName: document.getElementById('firstName').value,
+                lastName: document.getElementById('lastName').value,
+                companyName: document.getElementById('companyName').value || 'N/A',
+                email: document.getElementById('email').value,
+                inquiryType: document.getElementById('inquiryType').value || 'General',
+                message: document.getElementById('message').value
+            };
+
+            // 1. Send Email via EmailJS
+            // TODO: Replace 'YOUR_SERVICE_ID' and 'YOUR_TEMPLATE_ID'
+            emailjs.send("service_7u93erk", "template_37jj488", {
+                from_name: formData.firstName + ' ' + formData.lastName,
+                from_email: formData.email,
+                company: formData.companyName,
+                inquiry_type: formData.inquiryType,
+                message: formData.message,
+                to_name: "Zoya Overseas Admin"
+            }).then(() => {
+                console.log("Email sent successfully");
+            }).catch((err) => {
+                console.error("EmailJS Error:", err);
+            });
+
+            // 2. Save to Firebase Realtime Database
+            database.ref('inquiries/' + formData.id).set(formData)
+            .then(() => {
+                // Show success message
+                const successHtml = `
+                    <div class="success-message" style="text-align: center; padding: 40px 20px;">
+                        <div style="width: 64px; height: 64px; background-color: #E0E7FF; color: #4F46E5; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; margin: 0 auto 24px;">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <h3 style="font-size: 1.5rem; margin-bottom: 12px; color: var(--text-main);">Inquiry Sent Successfully</h3>
+                        <p style="color: var(--text-muted); margin-bottom: 24px;">Thank you, ${formData.firstName}. Our trade team has received your message and will contact you at ${formData.email} shortly.</p>
+                        <button onclick="location.reload()" class="btn btn-outline">Send Another Inquiry</button>
+                    </div>
+                `;
+                contactForm.innerHTML = successHtml;
+            })
+            .catch((error) => {
+                console.error("Firebase Error: ", error);
+                alert("There was an error submitting your inquiry. Please try again.");
+                submitBtn.innerHTML = originalBtnText;
+                submitBtn.disabled = false;
+            });
+        });
+    }
+});
+
 </script>
 </body>
 </html>
