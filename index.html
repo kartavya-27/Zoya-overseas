@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zoya Overseas LLC | Global Wholesale Excellence</title>
+    <!-- Use Inter font for a clean, corporate look -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+/* Inlined from css/common.css */
+/* ============================================
+   ZOYA OVERSEAS LLC - Minimalist Common Styles
+   ============================================ */
+
+/* ---- CSS Reset ---- */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ---- CSS Custom Properties ---- */
+:root {
+    --primary: #4C1D95; /* Deep Purple */
+    --primary-light: #F3E8FF; /* Very light purple for backgrounds */
+    --text-main: #111827;
+    --text-muted: #6B7280;
+    --bg-main: #FAFAFA;
+    --bg-white: #FFFFFF;
+    --bg-alt: #F3F4F6;
+    --border-color: #E5E7EB;
+    
+    --radius: 4px;
+    --radius-lg: 8px;
+    --transition: all 0.2s ease-in-out;
+    
+    --font-sans: 'Inter', system-ui, sans-serif;
+}
+
+/* ---- Base Styles ---- */
+html {
+    scroll-behavior: smooth;
+    font-family: var(--font-sans);
+}
+
+body {
+    background-color: var(--bg-main);
+    color: var(--text-muted);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--text-main);
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: var(--transition);
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+/* ---- Container ---- */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* ---- Buttons ---- */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 24px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: var(--transition);
+    border: 1px solid transparent;
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    color: var(--bg-white);
+}
+
+.btn-primary:hover {
+    background-color: #3B1673;
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: var(--text-main);
+    border-color: var(--text-main);
+}
+
+.btn-outline:hover {
+    background-color: var(--text-main);
+    color: var(--bg-white);
+}
+
+.btn-sm {
+    padding: 6px 16px;
+    font-size: 0.75rem;
+}
+
+/* ---- Navbar ---- */
+.navbar {
+    background-color: var(--bg-white);
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 72px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.nav-logo i {
+    font-size: 1.2rem;
+}
+
+.nav-links {
+    display: flex;
+    gap: 32px;
+}
+
+.nav-link {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    padding: 24px 0; /* To make hover target larger and align border to bottom */
+    position: relative;
+}
+
+.nav-link:hover {
+    color: var(--text-main);
+}
+
+.nav-link.active {
+    color: var(--text-main);
+}
+
+.nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px; /* Align with navbar border */
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--primary);
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+}
+
+/* Mobile Menu Toggle (Hidden by default) */
+.nav-toggle {
+    display: none;
+    font-size: 1.5rem;
+    color: var(--text-main);
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+/* ---- Footer ---- */
+.footer {
+    background-color: var(--bg-alt);
+    padding: 48px 0;
+    border-top: 1px solid var(--border-color);
+    margin-top: 80px;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end; /* Align bottom */
+}
+
+.footer-left h4 {
+    font-size: 1rem;
+    color: var(--text-main);
+    margin-bottom: 12px;
+}
+
+.footer-left p {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.footer-right {
+    display: flex;
+    gap: 24px;
+}
+
+.footer-right a {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.footer-right a:hover {
+    color: var(--text-main);
+}
+
+/* ---- Generic Section Spacing ---- */
+.section {
+    padding: 80px 0;
+}
+
+/* ---- Animation Utilities ---- */
+.animate-on-scroll, .animate-on-load {
+    opacity: 0;
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-up {
+    transform: translateY(30px);
+}
+
+.fade-in {
+    transform: translateY(0);
+}
+
+.animate-on-scroll.is-visible, .animate-on-load.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Delay Utilities for staggered animations */
+.delay-100 { transition-delay: 100ms; }
+.delay-200 { transition-delay: 200ms; }
+.delay-300 { transition-delay: 300ms; }
+.delay-400 { transition-delay: 400ms; }
+.delay-500 { transition-delay: 500ms; }
+
+/* ---- Responsive ---- */
+@media (max-width: 768px) {
+    .nav-links, .nav-right {
+        display: none;
+    }
+    .nav-toggle {
+        display: block;
+    }
+    
+    .footer-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 24px;
+    }
+    .footer-right {
+        flex-wrap: wrap;
+    }
+}
+
+</style>
+    <style>
+/* Inlined from css/index.css */
+/* ============================================
+   ZOYA OVERSEAS LLC - Homepage Styles
+   ============================================ */
+
+/* ---- Hero Section ---- */
+.hero {
+    padding: 80px 0 120px;
+    background: linear-gradient(180deg, #F9FAFB 0%, #FFFFFF 100%);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.hero-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.hero-content {
+    max-width: 540px;
+}
+
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background-color: var(--primary-light);
+    color: var(--primary);
+    padding: 4px 12px;
+    border-radius: 16px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-bottom: 24px;
+}
+
+.hero-badge i {
+    font-size: 0.7rem;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 24px;
+}
+
+.hero-desc {
+    font-size: 1rem;
+    color: var(--text-muted);
+    margin-bottom: 40px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 16px;
+}
+
+/* Hero Visuals (Collage) */
+.hero-visual {
+    position: relative;
+    height: 500px;
+}
+
+.hero-img-main {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 65%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--radius-lg);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.hero-img-secondary {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 45%;
+    height: 40%;
+    object-fit: cover;
+    border-radius: var(--radius-lg);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.hero-stat-card {
+    position: absolute;
+    right: 0;
+    bottom: 40px;
+    width: 45%;
+    background: var(--bg-white);
+    padding: 24px;
+    border-radius: var(--radius-lg);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.stat-icon {
+    display: inline-flex;
+    color: var(--primary);
+    font-size: 1.5rem;
+    margin-bottom: 32px;
+}
+
+.stat-value {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+.stat-label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+
+/* ---- About Section ---- */
+.about {
+    background-color: var(--bg-white);
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+}
+
+.about-content h2 {
+    font-size: 1.5rem;
+    margin-bottom: 16px;
+}
+
+.about-content p {
+    font-size: 0.875rem;
+    margin-bottom: 24px;
+    max-width: 400px;
+}
+
+.about-link {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--primary);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.about-link:hover {
+    gap: 12px;
+}
+
+.about-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
+
+.about-card {
+    background-color: var(--bg-white);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 32px 24px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.about-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05);
+}
+
+.about-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+}
+
+.icon-blue {
+    background-color: #E0E7FF;
+    color: #4F46E5;
+}
+
+.icon-purple {
+    background-color: var(--primary-light);
+    color: var(--primary);
+}
+
+.about-card h3 {
+    font-size: 1.125rem;
+    margin-bottom: 8px;
+}
+
+.about-card p {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+
+/* ---- Commodities Section ---- */
+.commodities {
+    background-color: var(--bg-main);
+    padding-bottom: 120px;
+}
+
+.commodities-header {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 60px;
+}
+
+.commodities-header h2 {
+    font-size: 1.5rem;
+    margin-bottom: 16px;
+}
+
+.commodities-header p {
+    font-size: 0.875rem;
+}
+
+.commodities-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
+
+.commodity-card {
+    position: relative;
+    height: 280px;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background-color: #E5E7EB; /* Fallback */
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.commodity-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 20px -5px rgba(0,0,0,0.1);
+}
+
+/* We don't have the actual images, so we use linear gradients to simulate them for the mockup */
+.commodity-card.plastic {
+    background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)), url('https://images.unsplash.com/photo-1585514013627-5264b3602d33?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80') center/cover;
+}
+
+.commodity-card.rubber {
+    background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)), url('https://images.unsplash.com/photo-1621252179027-94459d278660?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80') center/cover;
+}
+
+.commodity-card.textile {
+    background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)), url('https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80') center/cover;
+}
+
+.commodity-card.paper {
+    background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)), url('https://images.unsplash.com/photo-1596796901851-34e8ce7d04cc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80') center/cover;
+}
+
+.commodity-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(4px);
+    padding: 24px;
+    border-top: 1px solid rgba(255,255,255,0.5);
+}
+
+.commodity-title-wrap {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+.commodity-icon {
+    width: 28px;
+    height: 28px;
+    background-color: var(--primary-light);
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius);
+    font-size: 0.8rem;
+}
+
+.commodity-title-wrap h3 {
+    font-size: 1rem;
+    margin: 0;
+}
+
+.commodity-overlay p {
+    font-size: 0.75rem;
+    margin: 0;
+}
+
+
+/* ---- Responsive ---- */
+@media (max-width: 992px) {
+    .hero-container, .about-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .hero-visual {
+        margin-top: 40px;
+    }
+}
+
+@media (max-width: 768px) {
+    .about-cards, .commodities-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+</style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <i class="fas fa-globe-americas"></i> Zoya Overseas LLC
+            </a>
+            
+            <button class="nav-toggle" id="navToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <div class="nav-links">
+                <a href="index.html" class="nav-link active">Home</a>
+                <a href="products.html" class="nav-link">Products</a>
+                <a href="team.html" class="nav-link">Team</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </div>
+            
+            <div class="nav-right">
+                <a href="contact.html" class="btn btn-primary">Get a Quote</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-container">
+            <div class="hero-content">
+                <div class="hero-badge animate-on-load fade-in">
+                    <i class="far fa-clock"></i> EST. 2026
+                </div>
+                <h1 class="hero-title animate-on-load fade-up delay-100">Global Wholesale Excellence</h1>
+                <p class="hero-desc animate-on-load fade-up delay-200">
+                    Zoya Overseas LLC bridges international markets with premium wholesale commodities. We specialize in the high-volume distribution of essential industrial materials, ensuring reliable supply chains worldwide.
+                </p>
+                <div class="hero-buttons animate-on-load fade-up delay-300">
+                    <a href="products.html" class="btn btn-primary">Explore Commodities</a>
+                    <a href="contact.html" class="btn btn-outline">Partner With Us</a>
+                </div>
+            </div>
+            
+            <div class="hero-visual animate-on-load fade-in delay-400">
+                <!-- Using placeholder images that fit the industrial theme -->
+                <img src="https://images.unsplash.com/photo-1585514013627-5264b3602d33?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Industrial materials" class="hero-img-main">
+                <img src="https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Shipping port" class="hero-img-secondary">
+                
+                <div class="hero-stat-card">
+                    <i class="fas fa-cubes stat-icon"></i>
+                    <div class="stat-value">4 Core</div>
+                    <div class="stat-label">Commodity Sectors</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section about">
+        <div class="container about-grid">
+            <div class="about-content animate-on-scroll fade-up">
+                <h2>About Zoya Overseas</h2>
+                <p>
+                    Formed in 2026, we are building the next generation of global trade infrastructure, focusing on efficiency, transparency, and uncompromising material quality.
+                </p>
+                <a href="team.html" class="about-link">Learn our history <i class="fas fa-arrow-right"></i></a>
+            </div>
+            
+            <div class="about-cards">
+                <div class="about-card animate-on-scroll fade-up delay-100">
+                    <div class="about-icon icon-blue">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3>Global Reach</h3>
+                    <p>Connecting manufacturers across continents with seamless logistical support and compliance expertise.</p>
+                </div>
+                <div class="about-card animate-on-scroll fade-up delay-200">
+                    <div class="about-icon icon-purple">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Quality Assured</h3>
+                    <p>Rigorous vetting processes ensure all raw materials meet stringent international standards.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Commodities Section -->
+    <section class="section commodities">
+        <div class="container">
+            <div class="commodities-header animate-on-scroll fade-up">
+                <h2>Core Commodities</h2>
+                <p>Our specialized wholesale operations cover four primary industrial material sectors, providing scalable solutions for large-scale manufacturing.</p>
+            </div>
+            
+            <div class="commodities-grid">
+                <!-- Plastic -->
+                <div class="commodity-card plastic animate-on-scroll fade-up delay-100">
+                    <div class="commodity-overlay">
+                        <div class="commodity-title-wrap">
+                            <div class="commodity-icon"><i class="fas fa-recycle"></i></div>
+                            <h3>Plastic Materials</h3>
+                        </div>
+                        <p>Primary resins, polymers, and specialized plastic compounds sourced directly from premier petrochemical facilities.</p>
+                    </div>
+                </div>
+                
+                <!-- Rubber -->
+                <div class="commodity-card rubber animate-on-scroll fade-up delay-200">
+                    <div class="commodity-overlay">
+                        <div class="commodity-title-wrap">
+                            <div class="commodity-icon"><i class="fas fa-ring"></i></div>
+                            <h3>Rubber</h3>
+                        </div>
+                        <p>Natural and synthetic rubber for automotive and industrial applications.</p>
+                    </div>
+                </div>
+                
+                <!-- Textile -->
+                <div class="commodity-card textile animate-on-scroll fade-up delay-300">
+                    <div class="commodity-overlay">
+                        <div class="commodity-title-wrap">
+                            <div class="commodity-icon"><i class="fas fa-tshirt"></i></div>
+                            <h3>Textile Wholesale</h3>
+                        </div>
+                        <p>Raw fibers and woven materials for large-scale garment and industrial manufacturing.</p>
+                    </div>
+                </div>
+                
+                <!-- Paper -->
+                <div class="commodity-card paper animate-on-scroll fade-up delay-400">
+                    <div class="commodity-overlay">
+                        <div class="commodity-title-wrap">
+                            <div class="commodity-icon"><i class="fas fa-file-alt"></i></div>
+                            <h3>Paper & Pulp</h3>
+                        </div>
+                        <p>Bulk commercial paper, packaging materials, and raw pulp for publishing and packaging industries.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-container">
+            <div class="footer-left">
+                <h4><i class="fas fa-globe-americas"></i> Zoya Overseas LLC</h4>
+                <p>&copy; 2026 Zoya Overseas LLC. All rights reserved.</p>
+            </div>
+            <div class="footer-right">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="contact.html">Wholesale Inquiry</a>
+                <a href="contact.html">Contact Support</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+/* Inlined from js/common.js */
+/* ============================================
+   ZOYA OVERSEAS LLC - Minimalist Common JS
+   ============================================ */
+
+document.addEventListener('DOMContentLoaded', () => {
+    // ---- Mobile Menu Toggle ----
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.querySelector('.nav-links');
+    
+    if (navToggle && navLinks) {
+        navToggle.addEventListener('click', () => {
+            if (window.innerWidth <= 768) {
+                if (navLinks.style.display === 'flex') {
+                    navLinks.style.display = 'none';
+                } else {
+                    navLinks.style.display = 'flex';
+                    navLinks.style.flexDirection = 'column';
+                    navLinks.style.position = 'absolute';
+                    navLinks.style.top = '72px';
+                    navLinks.style.left = '0';
+                    navLinks.style.width = '100%';
+                    navLinks.style.backgroundColor = 'white';
+                    navLinks.style.padding = '20px';
+                    navLinks.style.borderBottom = '1px solid #E5E7EB';
+                    navLinks.style.zIndex = '99';
+                }
+            }
+        });
+        
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                navLinks.style.display = 'flex';
+                navLinks.style.flexDirection = 'row';
+                navLinks.style.position = 'static';
+                navLinks.style.padding = '0';
+                navLinks.style.borderBottom = 'none';
+            } else {
+                navLinks.style.display = 'none';
+            }
+        });
+    }
+
+    // ---- Scroll Reveal Animations ----
+    const animateElements = document.querySelectorAll('.animate-on-scroll');
+
+    if (animateElements.length > 0) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    // Optional: stop observing once animated
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        animateElements.forEach(el => observer.observe(el));
+    }
+    
+    // Trigger initial animations for elements already in viewport on load
+    setTimeout(() => {
+        document.querySelectorAll('.animate-on-load').forEach(el => {
+            el.classList.add('is-visible');
+        });
+    }, 100);
+});
+
+</script>
+</body>
+</html>
+

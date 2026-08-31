@@ -1,0 +1,15 @@
+[build]
+  # Since this is a pure HTML/CSS/JS site, there is no build command needed.
+  command = ""
+  
+  # The directory containing the static files to deploy.
+  # Using "." means the root directory of the repository.
+  publish = "."
+
+[[headers]]
+  # Basic security headers
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
