@@ -701,79 +701,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
 </script>
     <script>
-/* Inlined from js/contact.js */
 /* ============================================
-   ZOYA OVERSEAS LLC - Contact Form Handler
+   ZOYA OVERSEAS LLC - Contact Form Handler 
    ============================================ */
 
-document.addEventListener('DOMContentLoaded', () => {
-    const contactForm = document.getElementById('contactForm');
-    const formContainer = document.querySelector('.form-container');
-
-    if (contactForm) {
-        contactForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-
-            // Collect form data
-            const formData = {
-                id: Date.now().toString(),
-                date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute:'2-digit' }),
-                firstName: document.getElementById('firstName').value,
-                lastName: document.getElementById('lastName').value,
-                companyName: document.getElementById('companyName').value || 'N/A',
-                email: document.getElementById('email').value,
-                inquiryType: document.getElementById('inquiryType').value || 'General',
-                message: document.getElementById('message').value
-            };
-
-            // Get existing inquiries from localStorage or initialize empty array
-            let inquiries = JSON.parse(localStorage.getItem('zoya_inquiries')) || [];
-            
-            // Add new inquiry to the beginning of the array
-            inquiries.unshift(formData);
-            
-            // Save back to localStorage
-            localStorage.setItem('zoya_inquiries', JSON.stringify(inquiries));
-
-            // Show success message
-            const successHtml = `
-                <div class="success-message" style="text-align: center; padding: 40px 20px;">
-                    <div style="width: 64px; height: 64px; background-color: #E0E7FF; color: #4F46E5; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; margin: 0 auto 24px;">
-                        <i class="fas fa-check"></i>
-                    </div>
-                    <h3 style="font-size: 1.5rem; margin-bottom: 12px; color: var(--text-main);">Inquiry Sent Successfully</h3>
-                    <p style="color: var(--text-muted); margin-bottom: 24px;">Thank you, ${formData.firstName}. Our trade team has received your message and will contact you at ${formData.email} shortly.</p>
-                    <button onclick="location.reload()" class="btn btn-outline">Send Another Inquiry</button>
-                </div>
-            `;
-            
-            // Replace form with success message
-            contactForm.innerHTML = successHtml;
-        });
-    }
-});
-
-        /* Inlined from js/contact.js */
-/* ============================================
-   ZOYA OVERSEAS LLC - Contact Form Handler with Firebase & EmailJS
-   ============================================ */
-
-// 1. TODO: Initialize EmailJS (Replace with your actual Public Key)
+// 1. Initialize EmailJS
 emailjs.init("wLJLeEkM7kcuPIsr9");
 
-// 2. TODO: Initialize Firebase (Replace with your actual config)
+// 2. Initialize Firebase (Using v8 Compat syntax)
 const firebaseConfig = {
-  apiKey: "AIzaSyBUfvUESfr2Mx11nhqFD01XHtq7gg2kq7I",
-  authDomain: "zoya-173d6.firebaseapp.com",
-  databaseURL: "https://zoya-173d6-default-rtdb.firebaseio.com",
-  projectId: "zoya-173d6",
-  storageBucket: "zoya-173d6.firebasestorage.app",
-  messagingSenderId: "185154458416",
-  appId: "1:185154458416:web:dd5a5751e481a7996deef5",
-  measurementId: "G-N88VSVX1H0"
+    apiKey: "AIzaSyBUfvUESfr2Mx11nhqFD01XHtq7gg2kq7I",
+    authDomain: "zoya-173d6.firebaseapp.com",
+    databaseURL: "https://zoya-173d6-default-rtdb.firebaseio.com",
+    projectId: "zoya-173d6",
+    storageBucket: "zoya-173d6.firebasestorage.app",
+    messagingSenderId: "185154458416",
+    appId: "1:185154458416:web:1eca76398c91fd0d6deef5",
+    measurementId: "G-SLZWCHZKL1"
 };
 
-// Initialize Firebase
 if (!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
 }
@@ -804,8 +750,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 message: document.getElementById('message').value
             };
 
-            // 1. Send Email via EmailJS
-            // TODO: Replace 'YOUR_SERVICE_ID' and 'YOUR_TEMPLATE_ID'
+            // Send Email via EmailJS
             emailjs.send("service_7u93erk", "template_37jj488", {
                 from_name: formData.firstName + ' ' + formData.lastName,
                 from_email: formData.email,
@@ -813,13 +758,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 inquiry_type: formData.inquiryType,
                 message: formData.message,
                 to_name: "Zoya Overseas Admin"
-            }).then(() => {
-                console.log("Email sent successfully");
             }).catch((err) => {
                 console.error("EmailJS Error:", err);
             });
 
-            // 2. Save to Firebase Realtime Database
+            // Save to Firebase Realtime Database
             database.ref('inquiries/' + formData.id).set(formData)
             .then(() => {
                 // Show success message
@@ -844,7 +787,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
-
 </script>
 </body>
 </html>
