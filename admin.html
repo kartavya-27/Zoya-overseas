@@ -156,7 +156,7 @@ img {
     font-size: 0.875rem;
     font-weight: 500;
     color: var(--text-muted);
-    padding: 24px 0; /* To make hover target larger and align border to bottom */
+    padding: 24px 0;
     position: relative;
 }
 
@@ -171,7 +171,7 @@ img {
 .nav-link.active::after {
     content: '';
     position: absolute;
-    bottom: -1px; /* Align with navbar border */
+    bottom: -1px;
     left: 0;
     width: 100%;
     height: 2px;
@@ -183,7 +183,7 @@ img {
     align-items: center;
 }
 
-/* Mobile Menu Toggle (Hidden by default) */
+/* Mobile Menu Toggle */
 .nav-toggle {
     display: none;
     font-size: 1.5rem;
@@ -204,7 +204,7 @@ img {
 .footer-container {
     display: flex;
     justify-content: space-between;
-    align-items: flex-end; /* Align bottom */
+    align-items: flex-end;
 }
 
 .footer-left h4 {
@@ -256,7 +256,6 @@ img {
     transform: translateY(0);
 }
 
-/* Delay Utilities for staggered animations */
 .delay-100 { transition-delay: 100ms; }
 .delay-200 { transition-delay: 200ms; }
 .delay-300 { transition-delay: 300ms; }
@@ -281,7 +280,6 @@ img {
         flex-wrap: wrap;
     }
 }
-
 </style>
     <style>
 /* Inlined from css/admin.css */
@@ -290,7 +288,7 @@ img {
    ============================================ */
 
 .admin-body {
-    background-color: var(--bg-alt); /* Light gray background */
+    background-color: var(--bg-alt);
 }
 
 /* Sidebar & Layout */
@@ -423,7 +421,7 @@ img {
 .btn-delete {
     background: none;
     border: none;
-    color: #EF4444; /* Red */
+    color: #EF4444;
     cursor: pointer;
     font-size: 1rem;
     padding: 4px;
@@ -465,7 +463,6 @@ img {
         padding: 20px;
     }
 }
-
 </style>
 </head>
 <body class="admin-body">
@@ -521,14 +518,33 @@ img {
 
     </div>
 
+    <!-- Firebase CDN Links -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase-app.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase-firestore.js"></script>
+
+    <!-- Firebase Config & Setup -->
+    <script>
+        const firebaseConfig = {
+      apiKey: "AIzaSyBUfvUESfr2Mx11nhqFD01XHtq7gg2kq7I",
+      authDomain: "zoya-173d6.firebaseapp.com",
+      databaseURL: "https://zoya-173d6-default-rtdb.firebaseio.com",
+      projectId: "zoya-173d6",
+      storageBucket: "zoya-173d6.firebasestorage.app",
+      messagingSenderId: "185154458416",
+      appId: "1:185154458416:web:1eca76398c91fd0d6deef5",
+      measurementId: "G-SLZWCHZKL1"
+        };
+
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
+        }
+        const firestore = firebase.firestore();
+    </script>
+
     <script>
 /* Inlined from js/common.js */
-/* ============================================
-   ZOYA OVERSEAS LLC - Minimalist Common JS
-   ============================================ */
-
 document.addEventListener('DOMContentLoaded', () => {
-    // ---- Mobile Menu Toggle ----
+    // Mobile Menu Toggle
     const navToggle = document.getElementById('navToggle');
     const navLinks = document.querySelector('.nav-links');
     
@@ -565,7 +581,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ---- Scroll Reveal Animations ----
+    // Scroll Reveal Animations
     const animateElements = document.querySelectorAll('.animate-on-scroll');
 
     if (animateElements.length > 0) {
@@ -573,7 +589,6 @@ document.addEventListener('DOMContentLoaded', () => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('is-visible');
-                    // Optional: stop observing once animated
                     observer.unobserve(entry.target);
                 }
             });
@@ -585,32 +600,24 @@ document.addEventListener('DOMContentLoaded', () => {
         animateElements.forEach(el => observer.observe(el));
     }
     
-    // Trigger initial animations for elements already in viewport on load
     setTimeout(() => {
         document.querySelectorAll('.animate-on-load').forEach(el => {
             el.classList.add('is-visible');
         });
     }, 100);
 });
+    </script>
 
-</script>
     <script>
-/* Inlined from js/admin.js */
-/* ============================================
-   ZOYA OVERSEAS LLC - Admin Dashboard JS
-   ============================================ */
-
+/* Admin Dashboard - Firestore Integration */
 document.addEventListener('DOMContentLoaded', () => {
     const tableBody = document.getElementById('inquiriesTableBody');
-    
-    // Function to render the table
-    function renderTable() {
-        let inquiries = JSON.parse(localStorage.getItem('zoya_inquiries')) || [];
-        
-        // Clear current table
+
+    // Real-time listener for inquiries collection in Firestore
+    firestore.collection('inquiries').onSnapshot((snapshot) => {
         tableBody.innerHTML = '';
-        
-        if (inquiries.length === 0) {
+
+        if (snapshot.empty) {
             tableBody.innerHTML = `
                 <tr>
                     <td colspan="7">
@@ -625,18 +632,26 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Populate rows
+        const inquiries = [];
+        snapshot.forEach(doc => {
+            inquiries.push({ id: doc.id, ...doc.data() });
+        });
+
+        // Sort descending by timestamp or id fallback
+        inquiries.sort((a, b) => (b.timestamp || b.id || 0) - (a.timestamp || a.id || 0));
+
+        // Render table rows
         inquiries.forEach((inquiry) => {
             const tr = document.createElement('tr');
             
             tr.innerHTML = `
-                <td><span style="white-space: nowrap; font-size: 0.8rem; color: var(--text-muted);">${inquiry.date}</span></td>
-                <td style="font-weight: 500; color: var(--text-main);">${inquiry.firstName} ${inquiry.lastName}</td>
-                <td>${inquiry.companyName}</td>
-                <td><a href="mailto:${inquiry.email}" style="color: var(--primary);">${inquiry.email}</a></td>
-                <td><span class="type-badge">${inquiry.inquiryType}</span></td>
+                <td><span style="white-space: nowrap; font-size: 0.8rem; color: var(--text-muted);">${inquiry.date || ''}</span></td>
+                <td style="font-weight: 500; color: var(--text-main);">${inquiry.firstName || ''} ${inquiry.lastName || ''}</td>
+                <td>${inquiry.companyName || ''}</td>
+                <td><a href="mailto:${inquiry.email || ''}" style="color: var(--primary);">${inquiry.email || ''}</a></td>
+                <td><span class="type-badge">${inquiry.inquiryType || 'General'}</span></td>
                 <td>
-                    <div class="inquiry-message" title="${inquiry.message}">${inquiry.message}</div>
+                    <div class="inquiry-message" title="${inquiry.message || ''}">${inquiry.message || ''}</div>
                 </td>
                 <td style="text-align: right;">
                     <button class="btn-delete" onclick="deleteInquiry('${inquiry.id}')" title="Delete Inquiry">
@@ -647,113 +662,24 @@ document.addEventListener('DOMContentLoaded', () => {
             
             tableBody.appendChild(tr);
         });
-    }
-
-    // Initialize table
-    renderTable();
-
-    // Global function to delete inquiry
-    window.deleteInquiry = function(id) {
-        if (confirm('Are you sure you want to delete this inquiry?')) {
-            let inquiries = JSON.parse(localStorage.getItem('zoya_inquiries')) || [];
-            // Filter out the deleted ID
-            inquiries = inquiries.filter(item => item.id !== id);
-            // Save back
-            localStorage.setItem('zoya_inquiries', JSON.stringify(inquiries));
-            // Re-render
-            renderTable();
-        }
-    };
-});
-        /* Inlined from js/admin.js */
-/* ============================================
-   ZOYA OVERSEAS LLC - Admin Dashboard JS with Firebase
-   ============================================ */
-
-// 1. TODO: Initialize Firebase (Replace with your actual config)
-const firebaseConfig = {
-  apiKey: "AIzaSyBUfvUESfr2Mx11nhqFD01XHtq7gg2kq7I",
-  authDomain: "zoya-173d6.firebaseapp.com",
-  databaseURL: "https://zoya-173d6-default-rtdb.firebaseio.com",
-  projectId: "zoya-173d6",
-  storageBucket: "zoya-173d6.firebasestorage.app",
-  messagingSenderId: "185154458416",
-  appId: "1:185154458416:web:dd5a5751e481a7996deef5",
-  measurementId: "G-N88VSVX1H0"
-};
-
-// Initialize Firebase
-if (!firebase.apps.length) {
-    firebase.initializeApp(firebaseConfig);
-}
-const database = firebase.database();
-
-document.addEventListener('DOMContentLoaded', () => {
-    const tableBody = document.getElementById('inquiriesTableBody');
-    
-    // Listen for data from Firebase
-    database.ref('inquiries').on('value', (snapshot) => {
-        const data = snapshot.val();
-        tableBody.innerHTML = '';
-        
-        if (!data) {
-            tableBody.innerHTML = `
-                <tr>
-                    <td colspan="7">
-                        <div class="empty-state">
-                            <div class="empty-icon"><i class="far fa-folder-open"></i></div>
-                            <h3>No inquiries found</h3>
-                            <p>When customers fill out the contact form, their data will appear here.</p>
-                        </div>
-                    </td>
-                </tr>
-            `;
-            return;
-        }
-
-        // Convert object to array, sort by newest first (descending id/timestamp)
-        const inquiries = Object.keys(data).map(key => data[key]).sort((a, b) => b.id - a.id);
-
-        // Populate rows
-        inquiries.forEach((inquiry) => {
-            const tr = document.createElement('tr');
-            
-            tr.innerHTML = `
-                <td><span style="white-space: nowrap; font-size: 0.8rem; color: var(--text-muted);">${inquiry.date}</span></td>
-                <td style="font-weight: 500; color: var(--text-main);">${inquiry.firstName} ${inquiry.lastName}</td>
-                <td>${inquiry.companyName}</td>
-                <td><a href="mailto:${inquiry.email}" style="color: var(--primary);">${inquiry.email}</a></td>
-                <td><span class="type-badge">${inquiry.inquiryType}</span></td>
-                <td>
-                    <div class="inquiry-message" title="${inquiry.message}">${inquiry.message}</div>
-                </td>
-                <td style="text-align: right;">
-                    <button class="btn-delete" onclick="deleteInquiry('${inquiry.id}')" title="Delete Inquiry">
-                        <i class="far fa-trash-alt"></i>
-                    </button>
-                </td>
-            `;
-            
-            tableBody.appendChild(tr);
-        });
+    }, (error) => {
+        console.error("Error fetching documents: ", error);
     });
 
-    // Global function to delete inquiry from Firebase
+    // Delete inquiry document from Firestore
     window.deleteInquiry = function(id) {
         if (confirm('Are you sure you want to delete this inquiry?')) {
-            database.ref('inquiries/' + id).remove()
-            .then(() => {
-                console.log("Inquiry deleted");
-            })
-            .catch((error) => {
-                console.error("Error deleting inquiry:", error);
-                alert("Failed to delete. Check console.");
-            });
+            firestore.collection('inquiries').doc(id).delete()
+                .then(() => {
+                    console.log("Inquiry deleted successfully");
+                })
+                .catch((error) => {
+                    console.error("Error deleting inquiry: ", error);
+                    alert("Failed to delete. Check console.");
+                });
         }
     };
 });
-
-</script>
+    </script>
 </body>
 </html>
-
