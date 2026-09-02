@@ -488,7 +488,7 @@ img {
             if (confirm('Are you sure you want to delete this inquiry?')) {
                 firestore.collection('contacts').doc(id).delete()
                     .then(() => {
-                        console.log("Inquiry deleted successfully");
+                        console.log("Inquiry Deleted successfully");
                     })
                     .catch((error) => {
                         console.error("Error deleting inquiry: ", error);
