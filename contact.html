@@ -7,30 +7,26 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     
-    <!-- Firebase SDK -->
+    <!-- Firebase SDK (Updated to Firestore) -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
     
     <!-- EmailJS SDK -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
     <style>
-/* Inlined from css/common.css */
 /* ============================================
    ZOYA OVERSEAS LLC - Minimalist Common Styles
    ============================================ */
-
-/* ---- CSS Reset ---- */
 *, *::before, *::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* ---- CSS Custom Properties ---- */
 :root {
-    --primary: #4C1D95; /* Deep Purple */
-    --primary-light: #F3E8FF; /* Very light purple for backgrounds */
+    --primary: #4C1D95; 
+    --primary-light: #F3E8FF; 
     --text-main: #111827;
     --text-muted: #6B7280;
     --bg-main: #FAFAFA;
@@ -45,7 +41,6 @@
     --font-sans: 'Inter', system-ui, sans-serif;
 }
 
-/* ---- Base Styles ---- */
 html {
     scroll-behavior: smooth;
     font-family: var(--font-sans);
@@ -76,7 +71,6 @@ img {
     display: block;
 }
 
-/* ---- Container ---- */
 .container {
     width: 100%;
     max-width: 1200px;
@@ -84,7 +78,6 @@ img {
     padding: 0 24px;
 }
 
-/* ---- Buttons ---- */
 .btn {
     display: inline-flex;
     align-items: center;
@@ -118,12 +111,6 @@ img {
     color: var(--bg-white);
 }
 
-.btn-sm {
-    padding: 6px 16px;
-    font-size: 0.75rem;
-}
-
-/* ---- Navbar ---- */
 .navbar {
     background-color: var(--bg-white);
     border-bottom: 1px solid var(--border-color);
@@ -151,10 +138,6 @@ img {
     color: var(--primary);
 }
 
-.nav-logo i {
-    font-size: 1.2rem;
-}
-
 .nav-links {
     display: flex;
     gap: 32px;
@@ -164,22 +147,18 @@ img {
     font-size: 0.875rem;
     font-weight: 500;
     color: var(--text-muted);
-    padding: 24px 0; /* To make hover target larger and align border to bottom */
+    padding: 24px 0; 
     position: relative;
 }
 
-.nav-link:hover {
-    color: var(--text-main);
-}
-
-.nav-link.active {
+.nav-link:hover, .nav-link.active {
     color: var(--text-main);
 }
 
 .nav-link.active::after {
     content: '';
     position: absolute;
-    bottom: -1px; /* Align with navbar border */
+    bottom: -1px; 
     left: 0;
     width: 100%;
     height: 2px;
@@ -191,7 +170,6 @@ img {
     align-items: center;
 }
 
-/* Mobile Menu Toggle (Hidden by default) */
 .nav-toggle {
     display: none;
     font-size: 1.5rem;
@@ -201,7 +179,6 @@ img {
     cursor: pointer;
 }
 
-/* ---- Footer ---- */
 .footer {
     background-color: var(--bg-alt);
     padding: 48px 0;
@@ -212,7 +189,7 @@ img {
 .footer-container {
     display: flex;
     justify-content: space-between;
-    align-items: flex-end; /* Align bottom */
+    align-items: flex-end; 
 }
 
 .footer-left h4 {
@@ -221,7 +198,7 @@ img {
     margin-bottom: 12px;
 }
 
-.footer-left p {
+.footer-left p, .footer-right a {
     font-size: 0.75rem;
     color: var(--text-muted);
 }
@@ -231,21 +208,10 @@ img {
     gap: 24px;
 }
 
-.footer-right a {
-    font-size: 0.75rem;
-    color: var(--text-muted);
-}
-
 .footer-right a:hover {
     color: var(--text-main);
 }
 
-/* ---- Generic Section Spacing ---- */
-.section {
-    padding: 80px 0;
-}
-
-/* ---- Animation Utilities ---- */
 .animate-on-scroll, .animate-on-load {
     opacity: 0;
     transition: opacity 0.8s ease-out, transform 0.8s ease-out;
@@ -255,23 +221,13 @@ img {
     transform: translateY(30px);
 }
 
-.fade-in {
-    transform: translateY(0);
-}
-
 .animate-on-scroll.is-visible, .animate-on-load.is-visible {
     opacity: 1;
     transform: translateY(0);
 }
 
-/* Delay Utilities for staggered animations */
-.delay-100 { transition-delay: 100ms; }
 .delay-200 { transition-delay: 200ms; }
-.delay-300 { transition-delay: 300ms; }
-.delay-400 { transition-delay: 400ms; }
-.delay-500 { transition-delay: 500ms; }
 
-/* ---- Responsive ---- */
 @media (max-width: 768px) {
     .nav-links, .nav-right {
         display: none;
@@ -279,20 +235,14 @@ img {
     .nav-toggle {
         display: block;
     }
-    
     .footer-container {
         flex-direction: column;
         align-items: flex-start;
         gap: 24px;
     }
-    .footer-right {
-        flex-wrap: wrap;
-    }
 }
-
-</style>
+    </style>
     <style>
-/* Inlined from css/contact.css */
 /* ============================================
    ZOYA OVERSEAS LLC - Contact Styles
    ============================================ */
@@ -309,12 +259,6 @@ img {
     color: var(--primary);
 }
 
-.contact-header p {
-    max-width: 600px;
-    font-size: 0.875rem;
-}
-
-/* Contact Grid */
 .contact-section {
     padding: 0 0 80px;
     background-color: var(--bg-main);
@@ -326,7 +270,6 @@ img {
     gap: 40px;
 }
 
-/* Info Cards */
 .info-cards {
     display: flex;
     flex-direction: column;
@@ -352,7 +295,6 @@ img {
 .info-icon {
     color: var(--primary);
     font-size: 1.25rem;
-    margin-top: 4px;
 }
 
 .info-content h3 {
@@ -360,13 +302,11 @@ img {
     margin-bottom: 8px;
 }
 
-.info-content p, .info-content a {
+.info-content p {
     font-size: 0.875rem;
     color: var(--text-muted);
-    line-height: 1.6;
 }
 
-/* Map Image */
 .map-card {
     background-color: var(--bg-white);
     border: 1px solid var(--border-color);
@@ -404,16 +344,8 @@ img {
     display: flex;
     align-items: center;
     gap: 8px;
-    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.map-card:hover .map-btn {
-    background-color: var(--primary);
-    color: var(--bg-white);
-    border-color: var(--primary);
-}
-
-/* Form Container */
 .form-container {
     background-color: var(--bg-white);
     border: 1px solid var(--border-color);
@@ -475,23 +407,15 @@ img {
     margin-top: 32px;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
-    .contact-grid {
-        grid-template-columns: 1fr;
-    }
-    .form-grid {
+    .contact-grid, .form-grid {
         grid-template-columns: 1fr;
     }
     .form-group.full-width {
         grid-column: span 1;
     }
-    .contact-header h1 {
-        font-size: 2rem;
-    }
 }
-
-</style>
+    </style>
 </head>
 <body>
 
@@ -533,7 +457,6 @@ img {
             
             <!-- Left Column: Info Cards -->
             <div class="info-cards animate-on-scroll fade-up">
-                
                 <div class="info-card">
                     <div class="info-icon">
                         <i class="fas fa-map-marker-alt"></i>
@@ -554,21 +477,19 @@ img {
                     </div>
                 </div>
 
-                <!-- Stylized map image instead of embed, matching mockup -->
                 <div class="map-card">
                     <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Map View">
                     <a href="https://maps.google.com/?q=Industry+Area,+Umm+Al+Quwain,+UAE" target="_blank" class="map-btn">
                         <i class="far fa-map"></i> View on Maps
                     </a>
                 </div>
-
             </div>
 
             <!-- Right Column: Form -->
             <div class="form-container animate-on-scroll fade-up delay-200">
                 <h2>Send an Inquiry</h2>
                 
-                <form id="contactForm" action="#" method="POST">
+                <form id="contactForm">
                     <div class="form-grid">
                         <div class="form-group">
                             <label for="firstName">First Name</label>
@@ -636,164 +557,189 @@ img {
     </footer>
 
     <script>
-/* Inlined from js/common.js */
-/* ============================================
-   ZOYA OVERSEAS LLC - Minimalist Common JS
-   ============================================ */
-
-document.addEventListener('DOMContentLoaded', () => {
-    // ---- Mobile Menu Toggle ----
-    const navToggle = document.getElementById('navToggle');
-    const navLinks = document.querySelector('.nav-links');
-    
-    if (navToggle && navLinks) {
-        navToggle.addEventListener('click', () => {
-            if (window.innerWidth <= 768) {
-                if (navLinks.style.display === 'flex') {
-                    navLinks.style.display = 'none';
-                } else {
-                    navLinks.style.display = 'flex';
-                    navLinks.style.flexDirection = 'column';
-                    navLinks.style.position = 'absolute';
-                    navLinks.style.top = '72px';
-                    navLinks.style.left = '0';
-                    navLinks.style.width = '100%';
-                    navLinks.style.backgroundColor = 'white';
-                    navLinks.style.padding = '20px';
-                    navLinks.style.borderBottom = '1px solid #E5E7EB';
-                    navLinks.style.zIndex = '99';
-                }
-            }
-        });
+    /* ============================================
+       ZOYA OVERSEAS LLC - Common JS
+       ============================================ */
+    document.addEventListener('DOMContentLoaded', () => {
+        const navToggle = document.getElementById('navToggle');
+        const navLinks = document.querySelector('.nav-links');
         
-        window.addEventListener('resize', () => {
-            if (window.innerWidth > 768) {
-                navLinks.style.display = 'flex';
-                navLinks.style.flexDirection = 'row';
-                navLinks.style.position = 'static';
-                navLinks.style.padding = '0';
-                navLinks.style.borderBottom = 'none';
-            } else {
-                navLinks.style.display = 'none';
-            }
-        });
-    }
-
-    // ---- Scroll Reveal Animations ----
-    const animateElements = document.querySelectorAll('.animate-on-scroll');
-
-    if (animateElements.length > 0) {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('is-visible');
-                    // Optional: stop observing once animated
-                    observer.unobserve(entry.target);
+        if (navToggle && navLinks) {
+            navToggle.addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    if (navLinks.style.display === 'flex') {
+                        navLinks.style.display = 'none';
+                    } else {
+                        navLinks.style.display = 'flex';
+                        navLinks.style.flexDirection = 'column';
+                        navLinks.style.position = 'absolute';
+                        navLinks.style.top = '72px';
+                        navLinks.style.left = '0';
+                        navLinks.style.width = '100%';
+                        navLinks.style.backgroundColor = 'white';
+                        navLinks.style.padding = '20px';
+                        navLinks.style.borderBottom = '1px solid #E5E7EB';
+                        navLinks.style.zIndex = '99';
+                    }
                 }
             });
-        }, {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        });
+            
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 768) {
+                    navLinks.style.display = 'flex';
+                    navLinks.style.flexDirection = 'row';
+                    navLinks.style.position = 'static';
+                    navLinks.style.padding = '0';
+                    navLinks.style.borderBottom = 'none';
+                } else {
+                    navLinks.style.display = 'none';
+                }
+            });
+        }
 
-        animateElements.forEach(el => observer.observe(el));
-    }
-    
-    // Trigger initial animations for elements already in viewport on load
-    setTimeout(() => {
-        document.querySelectorAll('.animate-on-load').forEach(el => {
-            el.classList.add('is-visible');
-        });
-    }, 100);
-});
+        const animateElements = document.querySelectorAll('.animate-on-scroll');
+        if (animateElements.length > 0) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-</script>
+            animateElements.forEach(el => observer.observe(el));
+        }
+        
+        setTimeout(() => {
+            document.querySelectorAll('.animate-on-load').forEach(el => el.classList.add('is-visible'));
+        }, 100);
+    });
+    </script>
+
     <script>
-/* ============================================
-   ZOYA OVERSEAS LLC - Contact Form Handler 
-   ============================================ */
+    /* ============================================
+       ZOYA OVERSEAS LLC - Contact Form Handler 
+       ============================================ */
 
-// 1. Initialize EmailJS
-emailjs.init("wLJLeEkM7kcuPIsr9");
+    // 1. Initialize EmailJS
+    emailjs.init("7HoZipK8i84BUBWeN");
 
-const firebaseConfig = {
+    // 2. Initialize Firebase
+   const firebaseConfig = {
   apiKey: "AIzaSyBUfvUESfr2Mx11nhqFD01XHtq7gg2kq7I",
   authDomain: "zoya-173d6.firebaseapp.com",
   databaseURL: "https://zoya-173d6-default-rtdb.firebaseio.com",
   projectId: "zoya-173d6",
   storageBucket: "zoya-173d6.firebasestorage.app",
   messagingSenderId: "185154458416",
-  appId: "1:185154458416:web:d1d7c475bf5cf8836deef5",
-  measurementId: "G-T1D76KJ2F3"
+  appId: "1:185154458416:web:1eca76398c91fd0d6deef5",
+  measurementId: "G-SLZWCHZKL1"
 };
 
-if (!firebase.apps.length) {
-    firebase.initializeApp(firebaseConfig);
-}
-const database = firebase.database();
-
-document.addEventListener('DOMContentLoaded', () => {
-    const contactForm = document.getElementById('contactForm');
-    const submitBtn = contactForm ? contactForm.querySelector('button[type="submit"]') : null;
-
-    if (contactForm) {
-        contactForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            // Change button state to loading
-            const originalBtnText = submitBtn.innerHTML;
-            submitBtn.innerHTML = 'Sending... <i class="fas fa-circle-notch fa-spin" style="margin-left: 8px;"></i>';
-            submitBtn.disabled = true;
-
-            // Collect form data
-            const formData = {
-                id: Date.now().toString(),
-                date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute:'2-digit' }),
-                firstName: document.getElementById('firstName').value,
-                lastName: document.getElementById('lastName').value,
-                companyName: document.getElementById('companyName').value || 'N/A',
-                email: document.getElementById('email').value,
-                inquiryType: document.getElementById('inquiryType').value || 'General',
-                message: document.getElementById('message').value
-            };
-
-            // Send Email via EmailJS
-            emailjs.send("service_7u93erk", "template_37jj488", {
-                from_name: formData.firstName + ' ' + formData.lastName,
-                from_email: formData.email,
-                company: formData.companyName,
-                inquiry_type: formData.inquiryType,
-                message: formData.message,
-                to_name: "Zoya Overseas Admin"
-            }).catch((err) => {
-                console.error("EmailJS Error:", err);
-            });
-
-            // Save to Firebase Realtime Database
-            database.ref('inquiries/' + formData.id).set(formData)
-            .then(() => {
-                // Show success message
-                const successHtml = `
-                    <div class="success-message" style="text-align: center; padding: 40px 20px;">
-                        <div style="width: 64px; height: 64px; background-color: #E0E7FF; color: #4F46E5; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; margin: 0 auto 24px;">
-                            <i class="fas fa-check"></i>
-                        </div>
-                        <h3 style="font-size: 1.5rem; margin-bottom: 12px; color: var(--text-main);">Inquiry Sent Successfully</h3>
-                        <p style="color: var(--text-muted); margin-bottom: 24px;">Thank you, ${formData.firstName}. Our trade team has received your message and will contact you at ${formData.email} shortly.</p>
-                        <button onclick="location.reload()" class="btn btn-outline">Send Another Inquiry</button>
-                    </div>
-                `;
-                contactForm.innerHTML = successHtml;
-            })
-            .catch((error) => {
-                console.error("Firebase Error: ", error);
-                alert("There was an error submitting your inquiry. Please try again.");
-                submitBtn.innerHTML = originalBtnText;
-                submitBtn.disabled = false;
-            });
-        });
+    if (!firebase.apps.length) {
+        firebase.initializeApp(firebaseConfig);
     }
-});
-</script>
+    const firestore = firebase.firestore();
+
+    // 3. Handle Form Submission
+    document.addEventListener('DOMContentLoaded', () => {
+        const contactForm = document.getElementById('contactForm');
+        const submitBtn = contactForm ? contactForm.querySelector('button[type="submit"]') : null;
+
+        if (contactForm) {
+            contactForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                // Change button state to loading
+                const originalBtnText = submitBtn.innerHTML;
+                submitBtn.innerHTML = 'Sending... <i class="fas fa-circle-notch fa-spin" style="margin-left: 8px;"></i>';
+                submitBtn.disabled = true;
+
+                // Collect form data
+                const firstName = document.getElementById('firstName').value;
+                const lastName = document.getElementById('lastName').value;
+                const companyName = document.getElementById('companyName').value || 'N/A';
+                const email = document.getElementById('email').value;
+                const inquiryType = document.getElementById('inquiryType').value || 'General';
+                const message = document.getElementById('message').value;
+                
+                const fullName = `${firstName} ${lastName}`;
+                
+                const submittedDate = new Date().toLocaleString('en-US', {
+                    year: 'numeric', month: '2-digit', day: '2-digit',
+                    hour: '2-digit', minute: '2-digit', hour12: true
+                });
+
+                const formData = {
+                    name: fullName,
+                    firstName: firstName,
+                    lastName: lastName,
+                    companyName: companyName,
+                    email: email,
+                    inquiryType: inquiryType,
+                    message: message,
+                    submittedDate: submittedDate,
+                    timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                };
+
+                try {
+                    // A. Save to Firebase Firestore
+                    await firestore.collection('contacts').add(formData);
+                    console.log('✅ Data saved to Firebase');
+
+                    // B. Send User Confirmation Email via EmailJS
+                    const userEmailParams = {
+                        to_name: fullName,
+                        to_email: email,
+                        user_message: message
+                    };
+                    await emailjs.send(
+                        'ZOYA_123',
+                        'template_37jj488',
+                        userEmailParams
+                    );
+                    console.log('✅ Confirmation email sent to user');
+
+                    // C. Send Admin Notification Email via EmailJS
+                    const adminEmailParams = {
+                        user_name: fullName,
+                        user_email: email,
+                        user_message: `Company: ${companyName} | Inquiry Type: ${inquiryType} | Message: ${message}`,
+                        submitted_date: submittedDate
+                    };
+                    await emailjs.send(
+                        'ZOYA_123',
+                        'template_gdht94p',
+                        adminEmailParams
+                    );
+                    console.log('✅ Admin notification sent');
+
+                    // Show success message
+                    const successHtml = `
+                        <div class="success-message" style="text-align: center; padding: 40px 20px;">
+                            <div style="width: 64px; height: 64px; background-color: #E0E7FF; color: #4F46E5; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; margin: 0 auto 24px;">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <h3 style="font-size: 1.5rem; margin-bottom: 12px; color: var(--text-main);">Inquiry Sent Successfully</h3>
+                            <p style="color: var(--text-muted); margin-bottom: 24px;">Thank you, ${firstName}. Our trade team has received your message and will contact you at ${email} shortly.</p>
+                            <button onclick="location.reload()" class="btn btn-outline">Send Another Inquiry</button>
+                        </div>
+                    `;
+                    contactForm.innerHTML = successHtml;
+
+                } catch (error) {
+                    console.error('❌ Error:', error);
+                    if (error.text) {
+                        console.error('Error details:', error.text);
+                    }
+                    alert("There was an error submitting your inquiry. Please try again.");
+                    submitBtn.innerHTML = originalBtnText;
+                    submitBtn.disabled = false;
+                }
+            });
+        }
+    });
+    </script>
 </body>
 </html>
